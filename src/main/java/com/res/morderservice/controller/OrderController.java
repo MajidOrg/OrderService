@@ -28,7 +28,7 @@ public class OrderController {
             return ResponseEntity.badRequest().build();
         }
 
-        OrderResponse orderResponse = orderService.createOrder(restaurantOrder);
+        var orderResponse = orderService.createOrder(restaurantOrder);
         return ResponseEntity.status(HttpStatus.OK).body(orderResponse);
     }
 
