@@ -6,6 +6,7 @@ import com.res.morderservice.response.OrderResponse;
 import com.res.morderservice.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,15 @@ public class OrderController implements OrderAPI {
         }
         var orderResponse = orderService.createOrder(restaurantOrder);
         return ResponseEntity.status(HttpStatus.OK).body(orderResponse);
+    }
+
+    @Override
+    public ResponseEntity<OrderResponse> getOrderByCustomerName(@PathVariable String customerName) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(OrderResponse.builder()
+                        .orderId(123L)
+                        .orderDetails("TestOrder")
+                        .build());
     }
 
 }
