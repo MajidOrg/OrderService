@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class OrderController implements OrderAPI {
     private OrderService orderService;
+
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
@@ -25,6 +28,12 @@ public class OrderController implements OrderAPI {
         }
         var orderResponse = orderService.createOrder(restaurantOrder);
         return ResponseEntity.status(HttpStatus.OK).body(orderResponse);
+    }
+
+    public ResponseEntity<List<OrderResponse>> getAllOrder() {
+
+        var orderResList = orderService.getAllOrder();
+        return ResponseEntity.status(HttpStatus.OK).body(orderResList);
     }
 
     @Override

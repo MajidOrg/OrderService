@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Configuration
 @Tag(name = "The Restaurant application ")
 @OpenAPIDefinition
@@ -27,4 +29,6 @@ public interface OrderAPI {
 
     @GetMapping("/getOrderByCustomerName/{customerName}")
     ResponseEntity<OrderResponse> getOrderByCustomerName(@PathVariable String customerName);
+    @GetMapping("/getOrders")
+    public ResponseEntity<List<OrderResponse>> getAllOrder();
 }
