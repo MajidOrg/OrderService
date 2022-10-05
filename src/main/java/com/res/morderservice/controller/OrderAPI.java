@@ -27,8 +27,15 @@ public interface OrderAPI {
     @PostMapping("/createOrder")
     ResponseEntity<OrderResponse> createOrder(@RequestBody RestaurantOrder restaurantOrder);
 
+    @Operation(summary = "This API retrieve the order details for a customer")
+    @ApiResponses(value = {@ApiResponse(responseCode = "500", description = "Internal server error"),
+            @ApiResponse(responseCode = "200", description = "Ok")})
     @GetMapping("/getOrderByCustomerName/{customerName}")
     ResponseEntity<OrderResponse> getOrderByCustomerName(@PathVariable String customerName);
+
+    @Operation(summary = "This API retrieve all orders ")
+    @ApiResponses(value = {@ApiResponse(responseCode = "500", description = "Internal server error"),
+            @ApiResponse(responseCode = "200", description = "Ok")})
     @GetMapping("/getOrders")
     public ResponseEntity<List<OrderResponse>> getAllOrder();
 }
