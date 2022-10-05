@@ -1,6 +1,7 @@
 package com.res.morderservice.controller;
 
 import com.res.morderservice.dto.RestaurantOrder;
+import com.res.morderservice.dto.RestaurantOrderUpdate;
 import com.res.morderservice.response.OrderResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -37,4 +39,11 @@ public interface OrderAPI {
             @ApiResponse(responseCode = "200", description = "Ok")})
     @GetMapping("/getOrders")
     public ResponseEntity<List<OrderResponse>> getAllOrder();
+
+    @Operation(summary = "This API update an existing order ")
+    @ApiResponses(value = {@ApiResponse(responseCode = "500", description = "Internal server error"),
+            @ApiResponse(responseCode = "200", description = "Ok")})
+    @PutMapping("/updateOrder")
+    ResponseEntity<String> updateOrder(@RequestBody RestaurantOrderUpdate restaurantOrder);
 }
+

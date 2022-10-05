@@ -2,6 +2,7 @@ package com.res.morderservice.controller;
 
 
 import com.res.morderservice.dto.RestaurantOrder;
+import com.res.morderservice.dto.RestaurantOrderUpdate;
 import com.res.morderservice.response.OrderResponse;
 import com.res.morderservice.service.OrderService;
 import org.springframework.http.HttpStatus;
@@ -46,5 +47,15 @@ public class OrderController implements OrderAPI {
             return ResponseEntity.status(HttpStatus.OK).body(orderResList);
         }
 
+    }
+
+    public ResponseEntity<String> updateOrder(@RequestBody RestaurantOrderUpdate restaurantOrder) {
+
+        if (null == restaurantOrder ||
+                null == restaurantOrder.getOrderId()) {
+            return ResponseEntity.badRequest().build();
+        }
+        var orderResponse = orderService.updateOrder(restaurantOrder);
+        return ResponseEntity.status(HttpStatus.OK).body(orderResponse);
     }
 }

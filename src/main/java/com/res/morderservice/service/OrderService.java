@@ -1,6 +1,7 @@
 package com.res.morderservice.service;
 
 import com.res.morderservice.dto.RestaurantOrder;
+import com.res.morderservice.dto.RestaurantOrderUpdate;
 import com.res.morderservice.entity.Order;
 import com.res.morderservice.repository.OrderRepo;
 import com.res.morderservice.response.OrderResponse;
@@ -51,6 +52,21 @@ public class OrderService {
         return orderResponseList;
     }
 
+    public String updateOrder(RestaurantOrderUpdate restaurantOrder) {
+
+        var orderOptional = orderRepo.findById(restaurantOrder.getOrderId());
+
+        if(orderOptional.isEmpty()){
+            return  "Sorry no active order found";
+        }else{
+           var order = orderOptional.get();
+           order.setDishOrdered(restaurantOrder.getDishOrdered());
+           orderRepo.save(order);
+           return "Your order with Id :"+order.getOrderId()+
+                   " has been updated for dish :"+restaurantOrder.getDishOrdered();
+        }
+
+    }
 
     private OrderResponse mapToDto(Order order) {
 
@@ -59,6 +75,7 @@ public class OrderService {
         restaurantOrder.setOrderDetails(order.getDishOrdered());
         return restaurantOrder;
     }
+
 
 
 }
