@@ -21,4 +21,6 @@ public class Order {
     private String customerName;
     @Column(name = "customerOrder")
     private String dishOrdered;
+    @Column(name = "isActive")
+    private boolean active;
 }

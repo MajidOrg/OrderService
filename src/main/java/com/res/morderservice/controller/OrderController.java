@@ -37,12 +37,14 @@ public class OrderController implements OrderAPI {
     }
 
     @Override
-    public ResponseEntity<OrderResponse> getOrderByCustomerName(@PathVariable String customerName) {
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(OrderResponse.builder()
-                        .orderId(123L)
-                        .orderDetails("TestOrder")
-                        .build());
-    }
+    public ResponseEntity<List<OrderResponse>> getOrderByCustomerName(@PathVariable String customerName) {
 
+        if (null == customerName) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            var orderResList = orderService.getOrderForCustomer(customerName);
+            return ResponseEntity.status(HttpStatus.OK).body(orderResList);
+        }
+
+    }
 }

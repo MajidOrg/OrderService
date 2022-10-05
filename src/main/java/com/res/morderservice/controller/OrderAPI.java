@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -31,7 +30,7 @@ public interface OrderAPI {
     @ApiResponses(value = {@ApiResponse(responseCode = "500", description = "Internal server error"),
             @ApiResponse(responseCode = "200", description = "Ok")})
     @GetMapping("/getOrderByCustomerName/{customerName}")
-    ResponseEntity<OrderResponse> getOrderByCustomerName(@PathVariable String customerName);
+    public ResponseEntity<List<OrderResponse>> getOrderByCustomerName(String customerName);
 
     @Operation(summary = "This API retrieve all orders ")
     @ApiResponses(value = {@ApiResponse(responseCode = "500", description = "Internal server error"),

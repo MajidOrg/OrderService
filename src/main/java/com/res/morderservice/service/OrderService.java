@@ -25,6 +25,7 @@ public class OrderService {
 
         var order = new Order();
         BeanUtils.copyProperties(restaurantOrder, order);
+        order.setActive(true);
         var savedOrder = orderRepo.save(order);
 
         return OrderResponse.builder()
@@ -41,6 +42,16 @@ public class OrderService {
         return orderResponseList;
     }
 
+    public List<OrderResponse> getOrderForCustomer(String customerName) {
+
+       var orderList = orderRepo.findOrderByCustomerNameAndActive(customerName,true);
+        var orderResponseList = orderList.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+        return orderResponseList;
+    }
+
+
     private OrderResponse mapToDto(Order order) {
 
         var restaurantOrder = OrderResponse.builder().build();
@@ -48,4 +59,6 @@ public class OrderService {
         restaurantOrder.setOrderDetails(order.getDishOrdered());
         return restaurantOrder;
     }
+
+
 }
