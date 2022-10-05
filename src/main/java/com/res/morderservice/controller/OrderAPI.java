@@ -46,7 +46,7 @@ public interface OrderAPI {
     @Operation(summary = "This API delete an existing order ")
     @ApiResponses(value = {@ApiResponse(responseCode = "500", description = "Internal server error"),
             @ApiResponse(responseCode = "200", description = "Ok")})
-    @PutMapping("/deleteOrder")
+    @PutMapping("/deleteOrder/{orderId}")
     ResponseEntity<String> deleteOrder(@PathVariable String orderId);
 }
 
