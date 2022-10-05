@@ -58,4 +58,13 @@ public class OrderController implements OrderAPI {
         var orderResponse = orderService.updateOrder(restaurantOrder);
         return ResponseEntity.status(HttpStatus.OK).body(orderResponse);
     }
+
+    @Override
+    public ResponseEntity<String> deleteOrder(@PathVariable String orderId) {
+        if (null == orderId ){
+            return ResponseEntity.badRequest().build();
+        }
+        var orderResponse = orderService.deleteOrder(Long.valueOf(orderId));
+        return ResponseEntity.status(HttpStatus.OK).body(orderResponse);
+    }
 }

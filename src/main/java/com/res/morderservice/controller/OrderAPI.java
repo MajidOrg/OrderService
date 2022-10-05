@@ -10,10 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,5 +42,11 @@ public interface OrderAPI {
             @ApiResponse(responseCode = "200", description = "Ok")})
     @PutMapping("/updateOrder")
     ResponseEntity<String> updateOrder(@RequestBody RestaurantOrderUpdate restaurantOrder);
+
+    @Operation(summary = "This API delete an existing order ")
+    @ApiResponses(value = {@ApiResponse(responseCode = "500", description = "Internal server error"),
+            @ApiResponse(responseCode = "200", description = "Ok")})
+    @PutMapping("/deleteOrder")
+    ResponseEntity<String> deleteOrder(@PathVariable String orderId);
 }
 

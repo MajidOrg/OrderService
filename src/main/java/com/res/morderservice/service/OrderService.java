@@ -68,6 +68,20 @@ public class OrderService {
 
     }
 
+    public String deleteOrder(Long orderId) {
+
+        var orderOptional = orderRepo.findById(orderId);
+
+        if(orderOptional.isEmpty()){
+            return  "Sorry no active order found";
+        }else{
+            var order = orderOptional.get();
+            orderRepo.delete(order);
+            return "Your order with Id :"+order.getOrderId()+
+                    " has been deleted";
+        }
+    }
+
     private OrderResponse mapToDto(Order order) {
 
         var restaurantOrder = OrderResponse.builder().build();
