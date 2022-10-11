@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface OrderRepo extends JpaRepository<Order,Long> {
       List<Order> findOrderByCustomerNameAndActive(String customerName,boolean status);
+
+      List<Order> findOrderByCustomerNameIgnoreCaseAndActiveIsTrue(String customerName);
+
  }

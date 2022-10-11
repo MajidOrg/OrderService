@@ -45,7 +45,7 @@ public class OrderService {
 
     public List<OrderResponse> getOrderForCustomer(String customerName) {
 
-       var orderList = orderRepo.findOrderByCustomerNameAndActive(customerName,true);
+       var orderList = orderRepo.findOrderByCustomerNameIgnoreCaseAndActiveIsTrue(customerName);
         var orderResponseList = orderList.stream()
                 .map(this::mapToDto)
                 .collect(Collectors.toList());
