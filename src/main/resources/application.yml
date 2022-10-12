@@ -4,7 +4,7 @@ server:
     context-path: /res/v1
 spring:
   application:
-    name: Res_Order
+    name: restaurant-order
   datasource:
     url: jdbc:h2:mem:restaurant
     driver-class-name: org.h2.Driver
