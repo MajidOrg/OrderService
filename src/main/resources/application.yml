@@ -1,5 +1,7 @@
 server:
   port: 9002
+  servlet:
+    context-path: /res/v1
 spring:
   application:
     name: Res_Order
