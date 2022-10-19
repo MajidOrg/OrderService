@@ -5,15 +5,19 @@ import com.res.morderservice.dto.RestaurantOrder;
 import com.res.morderservice.dto.RestaurantOrderUpdate;
 import com.res.morderservice.response.OrderResponse;
 import com.res.morderservice.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
+@Slf4j
 public class OrderController implements OrderAPI {
     private OrderService orderService;
 
@@ -31,8 +35,9 @@ public class OrderController implements OrderAPI {
         return ResponseEntity.status(HttpStatus.OK).body(orderResponse);
     }
 
-    public ResponseEntity<List<OrderResponse>> getAllOrder() {
+    public ResponseEntity<List<OrderResponse>> getAllOrder(@RequestHeader Map<String,String> headers) {
 
+        log.info("###### header value is : {}", headers.get("restaurant"));
         var orderResList = orderService.getAllOrder();
         return ResponseEntity.status(HttpStatus.OK).body(orderResList);
     }

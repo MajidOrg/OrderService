@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Configuration
 @Tag(name = "The Restaurant application ")
@@ -35,7 +36,7 @@ public interface OrderAPI {
     @ApiResponses(value = {@ApiResponse(responseCode = "500", description = "Internal server error"),
             @ApiResponse(responseCode = "200", description = "Ok")})
     @GetMapping("/getOrders")
-    public ResponseEntity<List<OrderResponse>> getAllOrder();
+    public ResponseEntity<List<OrderResponse>> getAllOrder(@RequestHeader Map<String,String> headers);
 
     @Operation(summary = "This API update an existing order ")
     @ApiResponses(value = {@ApiResponse(responseCode = "500", description = "Internal server error"),
